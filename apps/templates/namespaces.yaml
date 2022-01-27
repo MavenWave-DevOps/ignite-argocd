@@ -1,14 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: namespaces
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: ingress-nginx-3.15.2
-    chart: ingress-nginx
+    targetRevision: HEAD
+    path: namespaces/base
   destination:
     server: https://kubernetes.default.svc
-    namespace: ingress-nginx
