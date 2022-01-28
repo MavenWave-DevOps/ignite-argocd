@@ -8,6 +8,11 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
+  ignoreDifferences:
+  - kind: Secret
+    name: wordpress
+    jsonPointers:
+    - /data/wordpress-password
   project: default
   source:
     repoURL: https://github.com/bradkwadsworth-mw/argocd-getting-started.git
