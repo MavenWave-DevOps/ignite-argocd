@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/bradkwadsworth-mw/argocd-getting-started.git
+    targetRevision: HEAD
+    path: cert-manager/base
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
