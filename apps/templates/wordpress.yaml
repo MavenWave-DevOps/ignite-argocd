@@ -10,9 +10,8 @@ metadata:
 spec:
   ignoreDifferences:
   - kind: Secret
-    name: wordpress
     jsonPointers:
-    - /data/wordpress-password
+    - /data
   project: default
   source:
     repoURL: https://github.com/bradkwadsworth-mw/argocd-getting-started.git
