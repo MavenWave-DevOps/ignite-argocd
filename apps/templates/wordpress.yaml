@@ -1,16 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook
+  name: wordpress
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "5"
 spec:
   project: default
   source:
-    repoURL: https://github.com/bradkwadsworth-mw/argocd-getting-started.git
-    targetRevision: HEAD
-    path: guestbook/local
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 13.0.6
+    chart: wordpress
   destination:
     server: https://kubernetes.default.svc
-    namespace: guestbook
+    namespace: wordpress
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
