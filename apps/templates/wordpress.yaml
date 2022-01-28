@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 13.0.6
-    chart: wordpress
+    repoURL: https://github.com/bradkwadsworth-mw/argocd-getting-started.git
+    targetRevision: HEAD
+    path: wordpress
     helm:
       valueFiles:
       - ../helm-values/wordpress/values.yaml
