@@ -17,7 +17,7 @@ Perform the following steps to setup ArgoCD on your local Kubernetes cluster.
 
 ```sh
 helm repo add argo https://argoproj.github.io/argo-helm
-helm -n argocd upgrade --install --create-namespace argocd argo/argo-cd -f argocd/helm/values.yaml
+helm -n argocd upgrade --install --create-namespace argocd argo/argo-cd -f argocd/helm/values.yaml --wait
 ```
 
 ## Setup
@@ -35,7 +35,7 @@ Login to ArgoCD with the cli
 ```sh
 argocd login localhost:8080
 ```
-Answer yes to Proceed insecurely and use `admin` for the username and the value form the preious step as the password.
+Answer yes to proceed insecurely and use `admin` for the username and the value form the preious step as the password.
 
 Change the ArgoCD admin password.
 ```sh
@@ -89,4 +89,9 @@ Login to the ArgoCD URL at `https://localhost:8080/`. Use the credentials that w
 ### CLI
 ```sh
 argocd app sync -l argocd.argoproj.io/instance=apps
+```
+
+## CLI Logout
+```sh
+argocd logout localhost:8080
 ```
