@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/bradkwadsworth-mw/argocd-getting-started.git
     targetRevision: HEAD
-    path: guestbook/base
+    path: guestbook/local
   destination:
     server: https://kubernetes.default.svc
     namespace: guestbook
