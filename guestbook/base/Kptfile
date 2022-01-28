@@ -1,0 +1,18 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: base
+upstream:
+  type: git
+  git:
+    repo: https://github.com/argoproj/argocd-example-apps
+    directory: /guestbook
+    ref: master
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/argoproj/argocd-example-apps
+    directory: /guestbook
+    ref: master
+    commit: 53e28ff20cc530b9ada2173fbbd64d48338583ba
