@@ -11,7 +11,7 @@
 ## Initial Setup
 Perform the following steps to setup ArgoCD on your local Kubernetes cluster.
 
-**BE SURE THAT YOUR `kubctl` CONTEXT IS POINTING TO YOUR LOCAL CLUSTER**
+**BE SURE THAT YOUR `kubectl` CONTEXT IS POINTING TO YOUR LOCAL CLUSTER**
 
 ## Install
 
@@ -44,7 +44,7 @@ argocd account update-password
 
 Create the inital ArgoCD application (App of Apps pattern)
 ```sh
-argocd app create apps --repo <this repo url> --path apps --dest-namespace argocd --dest-server https://kubernetes.default.svc  --sync-policy automated
+argocd app create apps --repo <this repo http url> --path apps --dest-namespace argocd --dest-server https://kubernetes.default.svc  --sync-policy automated
 ```
 
 ## UI Tour
