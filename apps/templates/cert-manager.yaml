@@ -33,7 +33,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/bradkwadsworth-mw/argocd-getting-started.git
+    repoURL: {{ .Values.repoURL }}
     targetRevision: HEAD
     path: cert-manager/issuers/base
   destination:

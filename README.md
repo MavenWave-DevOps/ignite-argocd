@@ -44,7 +44,7 @@ argocd account update-password
 
 Create the inital ArgoCD application (App of Apps pattern)
 ```sh
-argocd app create apps --repo <this repo http url> --path apps --dest-namespace argocd --dest-server https://kubernetes.default.svc  --sync-policy automated
+argocd app create apps --repo <this repo http url> --path apps --dest-namespace argocd --dest-server https://kubernetes.default.svc  --sync-policy automated --helm-set repoURL=<this repo http url>
 ```
 
 ## UI Tour
