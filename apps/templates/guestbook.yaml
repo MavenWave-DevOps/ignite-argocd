@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: {{ .Values.repoURL }}
-    targetRevision: HEAD
+    targetRevision: {{ .Values.revision }}
     path: guestbook/local
   destination:
     server: https://kubernetes.default.svc
@@ -19,3 +19,5 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

@@ -5,21 +5,27 @@ metadata:
   name: cert-manager
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "0"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: {{ .Values.repoURL }}
-    targetRevision: HEAD
-    path: cert-manager/install/base
+    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    targetRevision: v1.9.1
+    helm:
+      parameters:
+      - name: installCRDs
+        value: "true"
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
   syncPolicy:
     automated:
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -27,14 +33,14 @@ metadata:
   name: cert-manager-issuers
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: {{ .Values.repoURL }}
-    targetRevision: HEAD
+    targetRevision: {{ .Values.revision }}
     path: cert-manager/issuers/base
   destination:
     server: https://kubernetes.default.svc
