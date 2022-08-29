@@ -120,11 +120,12 @@ delete-cluster: install-kind
 ## Install Argocd
 install-argocd: install-helm
 	${HELM} repo add argo https://argoproj.github.io/argo-helm || true
+	${HELM} repo update || true
 	${HELM} -n argocd upgrade --install --create-namespace argocd argo/argo-cd -f argocd/helm/values.yaml --wait
 
 ## ArgoCD port-forward
 port-forward: install-kubectl
-	@${KUBECTL} port-forward svc/argocd-server -n argocd 8080:443 >/dev/null 2>&1 || true &
+	@${KUBECTL} -n argocd port-forward svc/argocd-server -n argocd 8080:443 >/dev/null 2>&1 || true &
 	@echo "ArgoCD is listening on https://localhost:8080"
 
 ## Login to ArgoCD cli
@@ -134,7 +135,12 @@ argocd-login: install-argocdcli port-forward
 
 ## Install initial ArgoCD app
 argocd-app: argocd-login
-	${ARGOCDCLI} --core --config ${WORKDIR}/.argocd/config app create apps --repo ${GIT_URL} --path apps --revision ${REVISION} --dest-namespace argocd --dest-server https://kubernetes.default.svc  --sync-policy automated --helm-set repoURL=${GIT_URL} --upsert --validate=false
+	${ARGOCDCLI} --core --config ${WORKDIR}/.argocd/config app create apps --repo ${GIT_URL} --path apps --revision ${REVISION} --dest-namespace argocd --dest-server https://kubernetes.default.svc  --sync-policy automated --helm-set repoURL=${GIT_URL}  --helm-set revision=${REVISION} --upsert --validate=false
+
+## Sync all apps
+sync-all: argocd-login
+	${ARGOCDCLI} --core --config ${WORKDIR}/.argocd/config app sync apps ;\
+	${ARGOCDCLI} --core --config ${WORKDIR}/.argocd/config app sync -l argocd.argoproj.io/instance=apps
 
 ## Get ArgoCD admin password
 get-password:
@@ -145,4 +151,7 @@ create: create-cluster install-argocd argocd-app
 
 ## Clean ArgoCD environment
 clean: delete-cluster
+
+## Clean all assets
+clean-all: delete-cluster
 	rm -Rf ${WORKDIR}

@@ -59,24 +59,11 @@ Some detail on Kubernetes can be viewed in these Applications as well such as po
 
 ![ArgoCD Pod Logs](imgs/pod-logs.gif)
 
-## Configure Applications
+## Access Applications
 ### Guestbook
-Edit `guestbook/local/ingress-patches.yaml` to set the Guestbook ingress to match your local machine's IP address
-```yaml
-- op: replace
-  path: /spec/rules/0/host
-  value: guestbook-<your-ip-address>.sslip.io
-```
+http://guestbook-127.0.0.1.sslip.io:8000
 ### Wordpress
-Edit `helm-values/wordpress/values.yaml` to set Wordpress ingress to match your local machine's IP address
-```yaml
-...
-ingress:
-  enabled: true
-  hostname: wordpress-<your-ip-address>.sslip.io
-...
-```
-
+https://wordpress-127.0.0.1.sslip.io:4430
 ## Sync Apps
 ### UI
 Login to the ArgoCD URL at `https://localhost:8080/`. Use the credentials that were used form above to log into the CLI. Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in this Git repo.
