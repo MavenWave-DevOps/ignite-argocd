@@ -1,50 +1,44 @@
 # ArgoCD Getting Started
 
 ## Requirements
-* A local Kubernetes cluster (Some examples below)
-  * [K3D](https://k3d.io/v5.2.2/)
+* Docker
   * [Rancher Desktop](https://rancherdesktop.io/)
-  * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
-* [Helm](https://helm.sh/docs/intro/install/)
-* [ArgoCD CLI](https://argo-cd.readthedocs.io/en/stable/cli_installation/)
 
-## Initial Setup
-Perform the following steps to setup ArgoCD on your local Kubernetes cluster.
+## Getting Started
+```sh
+make create
+```
+or if wanting to use a different source Git repo and/or Git branch.
+```sh
+make create GIT_URL=<git HTTP url> REVISION=<Git branch>
+```
 
 **BE SURE THAT YOUR `kubectl` CONTEXT IS POINTING TO YOUR LOCAL CLUSTER**
-
-## Install
-
 ```sh
-helm repo add argo https://argoproj.github.io/argo-helm
-helm -n argocd upgrade --install --create-namespace argocd argo/argo-cd -f argocd/helm/values.yaml --wait
+export KUBECONFIG=$PWD/kubeconfig
+kubectl config current-context
+```
+Should return `kind-ignite-argocd`
+
+## Local Development
+Set port-forward
+```sh
+make port-forward
+```
+Retrieve the login credentials
+```sh
+make get-password
+```
+Login to the ArgoCD UI with the information from the outputs above.
+
+### Using a DIfferent Repo or Branch
+```sh
+make argocd-app GIT_URL=<Git HTTP url> REVISION=<Git branch>
 ```
 
-## Setup
-In a separate teminal run the following.
+## Cleanup
 ```sh
-kubectl port-forward svc/argocd-server -n argocd 8080:443
-```
-
-Retrieve the current admin password
-```sh
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-```
-
-Login to ArgoCD with the cli
-```sh
-argocd login localhost:8080
-```
-Answer yes to proceed insecurely and use `admin` for the username and the value form the preious step as the password.
-
-Change the ArgoCD admin password.
-```sh
-argocd account update-password
-```
-
-Create the inital ArgoCD application (App of Apps pattern)
-```sh
-argocd app create apps --repo <this repo http url> --path apps --dest-namespace argocd --dest-server https://kubernetes.default.svc  --sync-policy automated --helm-set repoURL=<this repo http url>
+make clean
 ```
 
 ## UI Tour
@@ -65,24 +59,11 @@ Some detail on Kubernetes can be viewed in these Applications as well such as po
 
 ![ArgoCD Pod Logs](imgs/pod-logs.gif)
 
-## Configure Applications
+## Access Applications
 ### Guestbook
-Edit `guestbook/local/ingress-patches.yaml` to set the Guestbook ingress to match your local machine's IP address
-```yaml
-- op: replace
-  path: /spec/rules/0/host
-  value: guestbook-<your-ip-address>.sslip.io
-```
+http://guestbook-127.0.0.1.sslip.io:8000
 ### Wordpress
-Edit `helm-values/wordpress/values.yaml` to set Wordpress ingress to match your local machine's IP address
-```yaml
-...
-ingress:
-  enabled: true
-  hostname: wordpress-<your-ip-address>.sslip.io
-...
-```
-
+https://wordpress-127.0.0.1.sslip.io:4430
 ## Sync Apps
 ### UI
 Login to the ArgoCD URL at `https://localhost:8080/`. Use the credentials that were used form above to log into the CLI. Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in this Git repo.

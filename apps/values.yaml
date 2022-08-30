@@ -1,2 +1,3 @@
 ingress:
-  enable: false
+  enable: true
+revision: HEAD
