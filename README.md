@@ -14,6 +14,8 @@ make create GIT_URL=<git HTTP url> REVISION=<Git branch>
 ```
 
 **BE SURE THAT YOUR `kubectl` CONTEXT IS POINTING TO YOUR LOCAL CLUSTER**
+
+The following export command will change your kubeconfig file path to the kubeconfig file created after running make create. **Please note** this is permanent within the shell. To rerun this tutorial or work on something seperate, use a new shell or set the KUBECONFIG variable appropiately.
 ```sh
 export KUBECONFIG=$PWD/kubeconfig
 kubectl config current-context
@@ -25,20 +27,21 @@ Set port-forward
 ```sh
 make port-forward
 ```
+Should return `ArgoCD is listening on https://localhost:8080`
+
 Retrieve the login credentials
 ```sh
 make get-password
 ```
-Login to the ArgoCD UI with the information from the outputs above.
+Should return something like `Login with admin/{password}`
+
+### UI
+Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and your password is obtained from the output above. Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in this Git repo.
+
 
 ### Using a DIfferent Repo or Branch
 ```sh
 make argocd-app GIT_URL=<Git HTTP url> REVISION=<Git branch>
-```
-
-## Cleanup
-```sh
-make clean
 ```
 
 ## UI Tour
@@ -65,9 +68,18 @@ http://guestbook-127.0.0.1.sslip.io:8000
 ### Wordpress
 https://wordpress-127.0.0.1.sslip.io:4430
 ## Sync Apps
-### UI
-Login to the ArgoCD URL at `https://localhost:8080/`. Use the credentials that were used form above to log into the CLI. Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in this Git repo.
+
+## Cleanup
+
+This will delete the local cluster. Don't forget to close the shell to undo the change to the KUBECONFIG variable.
+
+```sh
+make clean
+```
+
 ### CLI
+
+The UI for argocd is what makes the application a great gitops tool. However, you can interact with it through the CLI.
 ```sh
 argocd app sync -l argocd.argoproj.io/instance=apps
 ```
