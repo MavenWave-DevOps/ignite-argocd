@@ -72,8 +72,14 @@ Some detail on Kubernetes can be viewed in these Applications, such as pod logs.
 ![ArgoCD Pod Logs](imgs/pod-logs.gif)
 
 ## Access Applications
+Click these links to see your active application!
+
 ### Guestbook
 http://guestbook-127.0.0.1.sslip.io:8000
+
+Should look like
+![Guestbook Page](imgs/guestbook-page.png)
+
 ### Wordpress
 https://wordpress-127.0.0.1.sslip.io:4430
 ## Sync Apps
