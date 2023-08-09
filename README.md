@@ -3,19 +3,26 @@
 ## Requirements
 * Docker
   * [Rancher Desktop](https://rancherdesktop.io/)
+ 
+ Start up Rancher Desktop and keep it running. Rancher Desktop runs Kubernetes and container management on your desktop.
 
 ## Getting Started
+
+This will create a local cluster, install ArgoCD, and set up the apps defined in this repo.
+
 ```sh
 make create
 ```
-or if wanting to use a different source Git repo and/or Git branch.
+
+(Optional) or if you want to use a different source Git repo and/or Git branch, use the following command.
 ```sh
 make create GIT_URL=<git HTTP url> REVISION=<Git branch>
 ```
 
 **BE SURE THAT YOUR `kubectl` CONTEXT IS POINTING TO YOUR LOCAL CLUSTER**
 
-The following export command will change your kubeconfig file path to the kubeconfig file created after running make create. **Please note** this is permanent within the shell. To rerun this tutorial or work on something seperate, use a new shell or set the KUBECONFIG variable appropiately.
+The following export command will change your kubeconfig file path. **Please note** this is permanent within the shell. To rerun this tutorial or work on something seperate, use a new shell or reset the KUBECONFIG variable appropiately.
+
 ```sh
 export KUBECONFIG=$PWD/kubeconfig
 kubectl config current-context
@@ -36,10 +43,12 @@ make get-password
 Should return something like `Login with admin/{password}`
 
 ### UI
-Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and your password is obtained from the output above. Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in this Git repo.
+Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and the {password} is obtained from the output above. Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in this Git repo.
 
+### (Optional) Changing your apps to source from a different repo.
 
-### Using a DIfferent Repo or Branch
+If you completed the steps above using the given repo and you want to change the apps to be sourced from a different repo, use the command below.
+
 ```sh
 make argocd-app GIT_URL=<Git HTTP url> REVISION=<Git branch>
 ```
@@ -58,7 +67,7 @@ The remaining Application blocks represent actual Helm charts or Kustomize manif
 
 ![ArgoCD Apps](imgs/app.gif)
 
-Some detail on Kubernetes can be viewed in these Applications as well such as pod logs.
+Some detail on Kubernetes can be viewed in these Applications, such as pod logs.
 
 ![ArgoCD Pod Logs](imgs/pod-logs.gif)
 
