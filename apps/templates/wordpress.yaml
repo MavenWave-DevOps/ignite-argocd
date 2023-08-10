@@ -16,7 +16,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: wordpress
-    targetRevision: 15.1.3
+    targetRevision: 17.0.5
     path: wordpress
     helm:
       parameters:
