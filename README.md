@@ -43,7 +43,7 @@ make get-password
 Should return something like `Login with admin/{password}`
 
 ### UI
-Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and the {password} is obtained from the output above. Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in this Git repo.
+Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and the {password} is obtained from the output above.
 
 ### (Optional) Changing your apps to source from a different repo.
 
@@ -82,10 +82,14 @@ Should look like
 
 ### Wordpress
 https://wordpress-127.0.0.1.sslip.io:4430
+
+Should look like
+![Wordpress Page](imgs/wordpress-page.png)
+
 ## Sync Apps
+Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in the Git repo.
 
 ## Cleanup
-
 This will delete the local cluster. Don't forget to close the shell to undo the change to the KUBECONFIG variable.
 
 ```sh
