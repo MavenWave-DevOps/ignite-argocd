@@ -78,16 +78,20 @@ Click these links to see your active application!
 http://guestbook-127.0.0.1.sslip.io:8000
 
 Should look like
-![Guestbook Page](imgs/guestbook-page.png)
+
+<img src="imgs/guestbook-page.png" width="500" />
 
 ### Wordpress
 https://wordpress-127.0.0.1.sslip.io:4430
 
 Should look like
-![Wordpress Page](imgs/wordpress-page.png)
+
+<img src="imgs/wordpress-page.png" width="500" />
 
 ## Sync Apps
 Click on the 'SYNC APPS` button towards the top of the page to sync your cluster with the applications in the Git repo.
+
+<img src="imgs/sync-apps.png" height="500" />
 
 ## Cleanup
 This will delete the local cluster. Don't forget to close the shell to undo the change to the KUBECONFIG variable.
