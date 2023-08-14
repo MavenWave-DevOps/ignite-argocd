@@ -21,7 +21,7 @@ make create GIT_URL=<git HTTP url> REVISION=<Git branch>
 
 **BE SURE THAT YOUR `kubectl` CONTEXT IS POINTING TO YOUR LOCAL CLUSTER**
 
-The following export command will change your kubeconfig file path. **Please note** this is permanent within the shell. To rerun this tutorial or work on something seperate, use a new shell or reset the KUBECONFIG variable appropiately.
+The following export command will change your kubeconfig file path. **Please note** this is permanent within the shell. To rerun this tutorial or work on a different kubernetes project, use a new shell (this will undo the change) or change the KUBECONFIG variable appropiately.
 
 ```sh
 export KUBECONFIG=$PWD/kubeconfig
