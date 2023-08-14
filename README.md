@@ -102,12 +102,16 @@ make clean
 
 ### CLI
 
-The UI for argocd is what makes the application a great gitops tool. However, you can interact with it through the CLI.
+The UI for argocd is what makes the application a great gitops tool. However, you can also interact with it through the CLI.
+
+Sync Apps
+
 ```sh
 argocd app sync -l argocd.argoproj.io/instance=apps
 ```
 
-## CLI Logout
+Logout
+
 ```sh
 argocd logout localhost:8080
 ```
