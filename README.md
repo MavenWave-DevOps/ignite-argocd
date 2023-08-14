@@ -43,7 +43,7 @@ make get-password
 Should return something like `Login with admin/<password>`
 
 ### UI
-Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and the <password> is obtained from the output above.
+Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and the '<password>' is obtained from the output above.
 
 ### (Optional) Changing your apps to source from a different repo.
 
