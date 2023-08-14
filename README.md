@@ -82,7 +82,7 @@ Should look like
 <img src="imgs/guestbook-page.png" width="500" />
 
 ### Wordpress
-https://wordpress-127.0.0.1.sslip.io:4430https://github.com/jaidenhausler-mw/ignite-argocd/blob/main/README.md
+https://wordpress-127.0.0.1.sslip.io:4430
 
 Should look like
 
