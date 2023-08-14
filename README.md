@@ -40,10 +40,10 @@ Retrieve the login credentials
 ```sh
 make get-password
 ```
-Should return something like `Login with admin/{password}`
+Should return something like `Login with admin/<password>`
 
 ### UI
-Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and the {password} is obtained from the output above.
+Login to the ArgoCD URL at `https://localhost:8080/`. The default user name is admin and the <password> is obtained from the output above.
 
 ### (Optional) Changing your apps to source from a different repo.
 
@@ -82,7 +82,7 @@ Should look like
 <img src="imgs/guestbook-page.png" width="500" />
 
 ### Wordpress
-https://wordpress-127.0.0.1.sslip.io:4430
+https://wordpress-127.0.0.1.sslip.io:4430https://github.com/jaidenhausler-mw/ignite-argocd/blob/main/README.md
 
 Should look like
 
